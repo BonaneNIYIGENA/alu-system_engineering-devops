@@ -1,0 +1,4 @@
+#!/bin/bash
+# Create RSA 4096-bit key pair with passphrase 'betty' named 'school'
+
+ssh-keygen -t rsa -b 4096 -f school -N ""
