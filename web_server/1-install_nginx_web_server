@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Installs nginx and sets up a simple web page
+
+apt-get update -y
+apt-get install -y nginx
+
+# Create a simple index page
+echo "Holberton School for the win!" > /var/www/html/index.nginx-debian.html
+
+# Restart nginx (without systemctl)
+service nginx restart
