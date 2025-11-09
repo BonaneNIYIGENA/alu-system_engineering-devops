@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>404 — Page not found</title>
+    <style>
+        :root{
+            --bg1:#0f1724;
+            --bg2:#071032;
+            --accent:#7c5cff;
+            --muted:rgba(255,255,255,0.7);
+            --card:#0b1220;
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0;
+            font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+            background: radial-gradient(1200px 600px at 10% 10%, rgba(124,92,255,0.12), transparent), radial-gradient(900px 400px at 90% 90%, rgba(7,16,50,0.5), transparent),linear-gradient(160deg,var(--bg1),var(--bg2));
+            color:#e6eef8;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:32px;
+        }
+
+        .card{
+            width:min(980px,96%);
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius:16px;
+            padding:36px;
+            display:flex;
+            gap:28px;
+            align-items:center;
+            box-shadow: 0 10px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+            backdrop-filter: blur(6px);
+        }
+
+        .graphic{
+            width:220px;
+            height:220px;
+            flex:0 0 220px;
+            display:grid;
+            place-items:center;
+            position:relative;
+        }
+
+        .orb{
+            width:160px;
+            height:160px;
+            border-radius:50%;
+            background: radial-gradient(circle at 35% 30%, #ffffff18, transparent 40%), linear-gradient(135deg,var(--accent),#2dd4bf 80%);
+            box-shadow: 0 8px 30px rgba(124,92,255,0.18), 0 2px 10px rgba(3,7,18,0.6);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            transform: rotate(-8deg);
+            position:relative;
+            overflow:hidden;
+        }
+
+        .orb::after{
+            content:"404";
+            font-weight:700;
+            font-size:56px;
+            color:white;
+            letter-spacing:2px;
+            text-shadow: 0 4px 14px rgba(0,0,0,0.6);
+            transform: translateY(6px) rotate(6deg);
+        }
+
+        .spark{
+            position:absolute;
+            width:18px;
+            height:18px;
+            background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(255,255,255,0.65));
+            border-radius:50%;
+            filter:blur(.6px);
+            animation: float 6s ease-in-out infinite;
+            opacity:0.9;
+        }
+
+        .spark.s1{top:10%; left:10%; animation-delay:-1s}
+        .spark.s2{bottom:8%; right:14%; animation-delay:-2s; width:12px; height:12px}
+        .spark.s3{top:40%; right:6%; animation-delay:-3s; width:10px;height:10px}
+        
+        @keyframes float{
+            0%{transform: translateY(0) scale(1)}
+            50%{transform: translateY(-12px) scale(1.08)}
+            100%{transform: translateY(0) scale(1)}
+        }
+
+        /* .content{
+            flex:1 1 auto;
+            min-width:0;
+        } */
+
+        h1{
+            margin:0 0 6px 0;
+            font-size:30px;
+            letter-spacing:-0.3px;
+            color:#fff;
+        }
+
+        p.lead{
+            margin:0 0 18px 0;
+            color:var(--muted);
+            line-height:1.4;
+        }
+
+        .btn{
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            padding:10px 16px;
+            border-radius:10px;
+            text-decoration:none;
+            font-weight:600;
+            font-size:14px;
+            cursor:pointer;
+            border:0;
+        }
+
+        .btn-primary{
+            background:linear-gradient(90deg,var(--accent),#00c2b3);
+            color:#061221;
+            box-shadow: 0 6px 18px rgba(124,92,255,0.18);
+        }
+
+    </style>
+</head>
+<body>
+    <main class="card" role="main" aria-labelledby="title">
+        <div class="graphic" aria-hidden="true">
+            <div class="orb"></div>
+            <span class="spark s1" aria-hidden="true"></span>
+            <span class="spark s2" aria-hidden="true"></span>
+            <span class="spark s3" aria-hidden="true"></span>
+        </div>
+
+        <div class="content">
+            <h1 id="title">We can't find that page</h1>
+            <h1 id="title">Ceci n'est pas une page</h1>
+            <p class="lead">But maybe you're looking for something else?</p>
+            <p class="lead">Sorry — the page you're looking for doesn't exist or has been moved. Try returning home or search for what you need.</p>
+            <div class="actions" role="navigation" aria-label="Actions">
+                <a class="btn btn-primary" href="/" title="Go to home">Take me home</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
