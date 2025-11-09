@@ -1,1 +1,2 @@
-Load balancing
+# Load balancing
+## Practice projects
