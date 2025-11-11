@@ -1,31 +1,29 @@
 #!/usr/bin/env bash
-# Installs and configures HAProxy to load balance between web-01 and web-02 using roundrobin
+# This script installs and configures HAProxy on a new Ubuntu server to load balance traffic between web-01 and web-02 using a round-robin algorithm.
+
+# Update system packages
+sudo apt update -y
+sudo apt upgrade -y
 
 # Install HAProxy
-apt-get update -y
-apt-get install -y haproxy
+sudo apt install -y haproxy
 
-# Enable HAProxy service on system boot
-systemctl enable haproxy
+# Enable HAProxy to start on boot
+sudo systemctl enable haproxy
 
-# Create a backup of the default configuration
-cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
-
-# Configure HAProxy
-cat > /etc/haproxy/haproxy.cfg << 'EOF'
+# Create HAProxy configuration file
+sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOF
 global
-    log /dev/log    local0
-    log /dev/log    local1 notice
-    daemon
+    log 127.0.0.1   local0
+    maxconn 200
 
 defaults
     log     global
-    mode    http
     option  httplog
     option  dontlognull
-    timeout connect 5000
-    timeout client  50000
-    timeout server  50000
+    timeout connect 5000ms
+    timeout client  50000ms
+    timeout server  50000ms
 
 frontend http_front
     bind *:80
@@ -33,9 +31,15 @@ frontend http_front
 
 backend http_back
     balance roundrobin
-    server web-01 54.158.78.233:80 check
-    server web-02 54.197.104.147:80 check
+    server web01 54.158.78.233:80 check
+    server web02 54.197.104.147:80 check
 EOF
 
-# Restart HAProxy to apply configuration
-systemctl restart haproxy
+# Test HAProxy configuration for syntax errors
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg
+
+# Restart HAProxy to apply the new configuration
+sudo systemctl restart haproxy
+
+# Display success message
+echo "HAProxy has been configured to load balance between web-01 and web-02 using round-robin."
