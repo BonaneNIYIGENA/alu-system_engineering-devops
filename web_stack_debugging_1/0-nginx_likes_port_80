@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-# Script to check if Nginx is running and responding on port 80
+# Ensures that Nginx is running and listening on port 80
 
-# Make a request to the Nginx server
-response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:80)
+# Start nginx service if it's not already running
+sudo service nginx start
 
-# Check if the HTTP response code is 200
-if [ "$response" -eq 200 ]; then
-    echo "2"  # Return 2 if the server responds with 200 OK
-else
-    echo "0"  # Return 0 if the response is not 200
-fi
+# Ensure nginx is listening on port 80
+sudo ss -tuln | grep ':80'
+
+# Check if Nginx is running properly by requesting the homepage
+curl -I http://localhost:80 | head -n 1
