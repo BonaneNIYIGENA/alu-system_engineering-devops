@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
-# This script ensures that Nginx is configured to listen on port 80 and is running
+# This script ensures that Nginx is configured to listen on port 80, 
+# that the default page displays "Hello Holberton", and Nginx is running correctly.
 
 # Ensure that Nginx is listening on port 80
 sudo sed -i 's/listen 127.0.0.1:80/listen 80 default_server;/' /etc/nginx/sites-available/default
 
-# Restart Nginx to apply changes
+# Set up the correct content for the default page
+echo "Hello Holberton" | sudo tee /var/www/html/index.html
+
+# Restart Nginx to apply the changes
 sudo service nginx restart
